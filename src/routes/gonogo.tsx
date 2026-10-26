@@ -8,7 +8,7 @@ import { daysLeft, formatShort, offers } from "@/lib/offers";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/gonogo")({
-  validateSearch: (s: Record<string, unknown>): { offre?: string } => (typeof s.offre === "string" ? { offre: s.offre } : {}),
+  validateSearch: (s: Record<string, unknown>): { offre?: string } => (typeof s["offre"] === "string" ? { offre: s["offre"] as string } : {}),
   head: () => ({
     meta: [
       { title: "Go/NoGo — Kaydan Scrapers" },
@@ -44,7 +44,7 @@ function GoNoGo() {
 
   const done = list.filter((a) => a.report);
   const toArbitrate = done.filter((a) => verdictFor(analysisIndex(a)!) !== "nogo").length;
-  const next = [...list].sort((a, b) => a.deadline.localeCompare(b.deadline))[0];
+  const next = [...list].sort((a, b) => a.deadline.localeCompare(b.deadline))[0]!;
 
   return (
     <AppShell>
@@ -141,7 +141,7 @@ function Row({ a }: { a: Analysis }) {
   );
 }
 
-function NewAnalysis({ offreId, onAdd }: { offreId?: string; onAdd: (a: Analysis) => void }) {
+function NewAnalysis({ offreId, onAdd }: { offreId?: string | undefined; onAdd: (a: Analysis) => void }) {
   const from = offers.find((o) => o.id === offreId);
   const [type, setType] = useState<"AO" | "AMI">(from?.type === "AMI" ? "AMI" : "AO");
   const [title, setTitle] = useState(from?.title ?? "");

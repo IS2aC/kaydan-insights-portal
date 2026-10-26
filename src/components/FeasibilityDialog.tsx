@@ -104,7 +104,7 @@ function LeverCard({ l, report, open, onToggle }: { l: Lever; report: Report; op
 export function FeasibilityDialog({ report, open, onOpenChange }: { report: Report; open: boolean; onOpenChange: (v: boolean) => void }) {
   const idx = computeIndex(report.levers);
   const v = verdictFor(idx);
-  const [openLever, setOpenLever] = useState<string | null>(report.levers.slice().sort((a, b) => a.score - b.score)[0].code);
+  const [openLever, setOpenLever] = useState<string | null>(report.levers.slice().sort((a, b) => a.score - b.score)[0]?.code ?? null);
   const weights = report.levers.reduce((a, l) => a + l.weight, 0);
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>

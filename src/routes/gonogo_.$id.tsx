@@ -69,7 +69,7 @@ function ReportPage() {
             <h1 className="mt-3 font-display text-2xl font-semibold leading-tight md:text-3xl">{a.title}</h1>
             <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-3">
               <Fact icon={Building2} label="Acheteur" value={a.buyer} />
-              <Fact icon={CalendarClock} label="Dépôt" value={`${r.keyInfo[0].items[0].value} · J-${left}`} tone={left <= 7 ? "text-destructive" : undefined} />
+              <Fact icon={CalendarClock} label="Dépôt" value={`${r.keyInfo[0]?.items[0]?.value ?? "—"} · J-${left}`} tone={left <= 7 ? "text-destructive" : undefined} />
               <Fact icon={Wallet} label="Financement" value={r.keyInfo.find((k) => k.label === "Source de financement")?.items[0].value ?? "—"} />
             </dl>
           </div>
@@ -117,7 +117,7 @@ function Fact({ icon: Icon, label, value, tone }: { icon: typeof Building2; labe
   );
 }
 
-function Card({ title, sub, children, right }: { title: string; sub?: string; children: React.ReactNode; right?: React.ReactNode }) {
+function Card({ title, sub, children, right }: { title: string; sub?: string | undefined; children: React.ReactNode; right?: React.ReactNode }) {
   return (
     <section className="rounded-2xl border bg-card p-5">
       <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
@@ -221,7 +221,7 @@ function Synthesis({ a, r, goTo }: { a: Analysis; r: Report; goTo: (t: Tab) => v
             {r.scope.map((s) => (
               <li key={s.label} className="text-sm">
                 <div className="flex justify-between"><span>{s.label}</span><span className="tabular-nums text-muted-foreground">{s.count}</span></div>
-                <div className="mt-1 h-1 overflow-hidden rounded-full bg-muted"><div className={cn("h-full rounded-full", a.scope.includes(s.label) ? "bg-primary" : "bg-muted-foreground/40")} style={{ width: `${(s.count / r.scope[0].count) * 100}%` }} /></div>
+                <div className="mt-1 h-1 overflow-hidden rounded-full bg-muted"><div className={cn("h-full rounded-full", a.scope.includes(s.label) ? "bg-primary" : "bg-muted-foreground/40")} style={{ width: `${(s.count / (r.scope[0]?.count ?? 1)) * 100}%` }} /></div>
               </li>
             ))}
           </ul>
@@ -237,7 +237,7 @@ function Synthesis({ a, r, goTo }: { a: Analysis; r: Report; goTo: (t: Tab) => v
   );
 }
 
-function Stat({ label, value, sub, tone, onClick }: { label: string; value: number; sub: string; tone?: string; onClick?: () => void }) {
+function Stat({ label, value, sub, tone, onClick }: { label: string; value: number; sub: string; tone?: string | undefined; onClick?: () => void }) {
   const C = onClick ? "button" : "div";
   return (
     <C onClick={onClick} className={cn("rounded-lg bg-muted/60 p-3 text-left", onClick && "hover:bg-muted")}>
