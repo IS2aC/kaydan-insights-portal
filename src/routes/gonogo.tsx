@@ -111,7 +111,7 @@ function Row({ a }: { a: Analysis }) {
         </div>
       </div>
       <div className="col-start-1 md:col-start-auto">
-        {a.status === "termine" && <span className="inline-flex items-center gap-1.5 text-sm font-medium text-success"><span className="h-1.5 w-1.5 rounded-full bg-success" />Rapport prêt <span className="font-normal text-muted-foreground">· {a.duration}</span></span>}
+        {a.status === "termine" && <span className="inline-flex items-center gap-1.5 whitespace-nowrap text-sm font-medium text-success"><span className="h-1.5 w-1.5 rounded-full bg-success" />Rapport prêt <span className="font-normal text-muted-foreground">· {a.duration}</span></span>}
         {a.status === "en-cours" && (
           <div className="text-sm">
             <span className="font-medium text-primary">Étape {a.step + 1}/6</span> <span className="text-muted-foreground">{STEPS[a.step]}</span>

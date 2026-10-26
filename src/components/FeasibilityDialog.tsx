@@ -13,7 +13,7 @@ function Radar({ levers }: { levers: Lever[] }) {
   });
   const ring = (k: number) => levers.map((_, i) => { const a = -Math.PI / 2 + (i * Math.PI) / 2; return `${c + Math.cos(a) * R * k},${c + Math.sin(a) * R * k}`; }).join(" ");
   return (
-    <svg viewBox="0 0 260 260" className="mx-auto w-full max-w-[300px]" role="img" aria-label="Profil des quatre leviers">
+    <svg viewBox="-40 0 340 260" className="mx-auto w-full max-w-[300px]" role="img" aria-label="Profil des quatre leviers">
       {[0.25, 0.5, 0.75, 1].map((k) => <polygon key={k} points={ring(k)} fill="none" stroke="var(--border)" strokeWidth={1} />)}
       <polygon points={pts.map((p) => `${p.x},${p.y}`).join(" ")} fill="color-mix(in oklab, var(--primary) 15%, transparent)" stroke="var(--primary)" strokeWidth={2} />
       {pts.map((p) => <circle key={p.l.code} cx={p.x} cy={p.y} r={4} fill="var(--primary)" />)}
