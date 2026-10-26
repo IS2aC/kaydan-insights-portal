@@ -128,6 +128,7 @@ export function OfferPanel({ offer, onClose }: { offer: Offer | null; onClose: (
           <button className="inline-flex items-center gap-2 rounded-lg border px-4 py-2.5 text-sm font-medium hover:bg-muted"><Bookmark className="h-4 w-4" />Suivre</button>
           <Link
             to="/gonogo"
+            search={{ offre: offer.id }}
             disabled={!ready}
             className={cn(
               "ml-auto inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold",
