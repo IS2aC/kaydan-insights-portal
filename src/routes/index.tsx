@@ -27,6 +27,7 @@ const features = [
 
 function Login() {
   const [show, setShow] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <main className="grid min-h-screen lg:grid-cols-[1.1fr_1fr]">
