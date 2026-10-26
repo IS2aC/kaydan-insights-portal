@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Mail, Lock, Eye, EyeOff, ArrowRight, Check, Search, Building2, BarChart3, Bell } from "lucide-react";
 import hero from "@/assets/hero.jpg";
+import logoLight from "@/assets/logo-kaydan-light.png";
+import logoDark from "@/assets/logo-kaydan-dark.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -19,17 +21,11 @@ export const Route = createFileRoute("/")({
 
 function Logo({ inverted = false }: { inverted?: boolean }) {
   return (
-    <div className="flex items-center gap-3">
-      <svg viewBox="0 0 48 48" className="h-11 w-11" aria-hidden>
-        <path d="M6 4h11v40H6z" className="fill-brand-blue" />
-        <path d="M17 26 34 4h12L26 28z" className="fill-brand-orange" />
-        <path d="M22 24 46 44H33L17 30z" className="fill-primary" />
-      </svg>
-      <div className="leading-none">
-        <div className={`font-display text-2xl font-bold tracking-tight ${inverted ? "text-navy-foreground" : "text-navy"}`}>Kaydan</div>
-        <div className="font-display text-lg font-semibold text-brand-orange">Insights</div>
-      </div>
-    </div>
+    <img
+      src={inverted ? logoDark : logoLight}
+      alt="Kaydan Scrapers"
+      className={`w-auto max-w-full self-start ${inverted ? "h-14" : "h-12"}`}
+    />
   );
 }
 
@@ -72,7 +68,7 @@ function Login() {
               ))}
             </ul>
           </div>
-          <p className="text-xs uppercase tracking-[0.3em] text-navy-foreground/60">
+          <p className="text-xs uppercase tracking-[0.3em] text-navy-foreground/80">
             Appels d'offres • Intelligence • Opportunités
           </p>
         </div>
@@ -83,7 +79,7 @@ function Login() {
         <div className="w-full max-w-md">
           <div className="mb-10 lg:hidden"><Logo /></div>
 
-          <h2 className="text-3xl font-bold text-navy">Bon retour 👋</h2>
+          <h2 className="text-3xl font-bold text-navy">Bon retour</h2>
           <p className="mt-2 text-muted-foreground">Connectez-vous pour accéder à vos opportunités du jour.</p>
 
           <form className="mt-8 space-y-5 rounded-2xl border bg-card p-8 shadow-card" onSubmit={(e) => e.preventDefault()}>
