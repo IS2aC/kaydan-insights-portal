@@ -1,16 +1,15 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
-import { Mail, Lock, Eye, EyeOff, ArrowRight, Check, Search, Building2, BarChart3, Bell } from "lucide-react";
-import hero from "@/assets/hero.jpg";
-import logoLight from "@/assets/logo-kaydan-light.png";
-import logoDark from "@/assets/logo-kaydan-dark.png";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState, type FormEvent } from "react";
+import { Mail, Lock, Eye, EyeOff, ArrowRight, Search, Building2, BarChart3, Bell } from "lucide-react";
+import { AuthVisual } from "@/components/AuthVisual";
+import { Logo } from "@/components/Logo";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Connexion — Kaydan Insights" },
-      { name: "description", content: "Connectez-vous à Kaydan Insights : veille, analyse et opportunités sur les appels d'offres et AMI." },
-      { property: "og:title", content: "Connexion — Kaydan Insights" },
+      { title: "Connexion — Kaydan Scrapers" },
+      { name: "description", content: "Connectez-vous à Kaydan Scrapers : veille, analyse et opportunités sur les appels d'offres et AMI." },
+      { property: "og:title", content: "Connexion — Kaydan Scrapers" },
       { property: "og:description", content: "Veillez. Analysez. Décidez. Remportez." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -18,16 +17,6 @@ export const Route = createFileRoute("/")({
   }),
   component: Login,
 });
-
-function Logo({ inverted = false }: { inverted?: boolean }) {
-  return (
-    <img
-      src={inverted ? logoDark : logoLight}
-      alt="Kaydan Scrapers"
-      className={`w-auto max-w-full self-start ${inverted ? "h-14" : "h-12"}`}
-    />
-  );
-}
 
 const features = [
   { icon: Search, label: "Détection automatique" },
@@ -41,45 +30,14 @@ function Login() {
 
   return (
     <main className="grid min-h-screen lg:grid-cols-[1.1fr_1fr]">
-      {/* Visual panel */}
-      <section className="relative hidden overflow-hidden lg:block">
-        <img src={hero} alt="" className="absolute inset-0 h-full w-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-navy" />
-        <div className="absolute -right-24 top-0 h-full w-48 skew-x-[-12deg] bg-brand-orange/80" />
-        <div className="relative flex h-full flex-col justify-between p-12 text-navy-foreground">
-          <Logo inverted />
-          <div className="max-w-md">
-            <span className="mb-6 block h-1 w-12 rounded-full bg-brand-orange" />
-            <h1 className="text-5xl font-bold leading-[1.1]">
-              Veillez.<br />Analysez.<br />Décidez.<br />
-              <span className="text-brand-orange">Remportez.</span>
-            </h1>
-            <p className="mt-6 text-navy-foreground/80">
-              La solution tout-en-un pour détecter, analyser et suivre vos appels d'offres et AMI.
-            </p>
-            <ul className="mt-8 space-y-3">
-              {["Plus rapide", "Plus pertinent", "Plus de succès"].map((t) => (
-                <li key={t} className="flex items-center gap-3">
-                  <span className="grid h-6 w-6 place-items-center rounded-md bg-brand-orange">
-                    <Check className="h-4 w-4" strokeWidth={3} />
-                  </span>
-                  {t}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <p className="text-xs uppercase tracking-[0.3em] text-navy-foreground/80">
-            Appels d'offres • Intelligence • Opportunités
-          </p>
-        </div>
-      </section>
+      <AuthVisual />
 
       {/* Form panel */}
       <section className="flex flex-col items-center justify-center px-6 py-12 sm:px-12">
         <div className="w-full max-w-md">
           <div className="mb-10 lg:hidden"><Logo /></div>
 
-          <h2 className="text-3xl font-bold text-navy">Bon retour</h2>
+          <h1 className="text-3xl font-bold text-navy">Bon retour</h1>
           <p className="mt-2 text-muted-foreground">Connectez-vous pour accéder à vos opportunités du jour.</p>
 
           <form className="mt-8 space-y-5 rounded-2xl border bg-card p-8 shadow-card" onSubmit={(e) => e.preventDefault()}>
@@ -122,6 +80,11 @@ function Login() {
             </button>
           </form>
 
+          <p className="mt-6 text-center text-sm text-muted-foreground">
+            Pas encore de compte ?{" "}
+            <Link to="/inscription" className="font-semibold text-primary hover:underline">Créer un compte</Link>
+          </p>
+
           <div className="mt-10 grid grid-cols-4 gap-2 text-center">
             {features.map(({ icon: Icon, label }) => (
               <div key={label} className="flex flex-col items-center gap-2">
@@ -130,7 +93,7 @@ function Login() {
               </div>
             ))}
           </div>
-          <p className="mt-10 text-center text-xs text-muted-foreground">© 2026 Kaydan Insights. Tous droits réservés.</p>
+          <p className="mt-10 text-center text-xs text-muted-foreground">© 2026 Kaydan Scrapers. Tous droits réservés.</p>
         </div>
       </section>
     </main>
