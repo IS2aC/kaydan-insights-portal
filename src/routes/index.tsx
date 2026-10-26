@@ -1,24 +1,142 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import { Mail, Lock, Eye, EyeOff, ArrowRight, Check, Search, Building2, BarChart3, Bell } from "lucide-react";
+import hero from "@/assets/hero.jpg";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "Connexion — Kaydan Insights" },
+      { name: "description", content: "Connectez-vous à Kaydan Insights : veille, analyse et opportunités sur les appels d'offres et AMI." },
+      { property: "og:title", content: "Connexion — Kaydan Insights" },
+      { property: "og:description", content: "Veillez. Analysez. Décidez. Remportez." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: Login,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function Logo({ inverted = false }: { inverted?: boolean }) {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="flex items-center gap-3">
+      <svg viewBox="0 0 48 48" className="h-11 w-11" aria-hidden>
+        <path d="M6 4h11v40H6z" className="fill-brand-blue" />
+        <path d="M17 26 34 4h12L26 28z" className="fill-brand-orange" />
+        <path d="M22 24 46 44H33L17 30z" className="fill-primary" />
+      </svg>
+      <div className="leading-none">
+        <div className={`font-display text-2xl font-bold tracking-tight ${inverted ? "text-navy-foreground" : "text-navy"}`}>Kaydan</div>
+        <div className="font-display text-lg font-semibold text-brand-orange">Insights</div>
+      </div>
     </div>
+  );
+}
+
+const features = [
+  { icon: Search, label: "Détection automatique" },
+  { icon: Building2, label: "Profiling entreprises" },
+  { icon: BarChart3, label: "Indice de faisabilité" },
+  { icon: Bell, label: "Alertes temps réel" },
+];
+
+function Login() {
+  const [show, setShow] = useState(false);
+
+  return (
+    <main className="grid min-h-screen lg:grid-cols-[1.1fr_1fr]">
+      {/* Visual panel */}
+      <section className="relative hidden overflow-hidden lg:block">
+        <img src={hero} alt="" className="absolute inset-0 h-full w-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-navy" />
+        <div className="absolute -right-24 top-0 h-full w-48 skew-x-[-12deg] bg-brand-orange/80" />
+        <div className="relative flex h-full flex-col justify-between p-12 text-navy-foreground">
+          <Logo inverted />
+          <div className="max-w-md">
+            <span className="mb-6 block h-1 w-12 rounded-full bg-brand-orange" />
+            <h1 className="text-5xl font-bold leading-[1.1]">
+              Veillez.<br />Analysez.<br />Décidez.<br />
+              <span className="text-brand-orange">Remportez.</span>
+            </h1>
+            <p className="mt-6 text-navy-foreground/80">
+              La solution tout-en-un pour détecter, analyser et suivre vos appels d'offres et AMI.
+            </p>
+            <ul className="mt-8 space-y-3">
+              {["Plus rapide", "Plus pertinent", "Plus de succès"].map((t) => (
+                <li key={t} className="flex items-center gap-3">
+                  <span className="grid h-6 w-6 place-items-center rounded-md bg-brand-orange">
+                    <Check className="h-4 w-4" strokeWidth={3} />
+                  </span>
+                  {t}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <p className="text-xs uppercase tracking-[0.3em] text-navy-foreground/60">
+            Appels d'offres • Intelligence • Opportunités
+          </p>
+        </div>
+      </section>
+
+      {/* Form panel */}
+      <section className="flex flex-col items-center justify-center px-6 py-12 sm:px-12">
+        <div className="w-full max-w-md">
+          <div className="mb-10 lg:hidden"><Logo /></div>
+
+          <h2 className="text-3xl font-bold text-navy">Bon retour 👋</h2>
+          <p className="mt-2 text-muted-foreground">Connectez-vous pour accéder à vos opportunités du jour.</p>
+
+          <form className="mt-8 space-y-5 rounded-2xl border bg-card p-8 shadow-card" onSubmit={(e) => e.preventDefault()}>
+            <div>
+              <label htmlFor="email" className="mb-2 block text-sm font-medium">Adresse e-mail</label>
+              <div className="relative">
+                <Mail className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <input id="email" type="email" required placeholder="nom@entreprise.com"
+                  className="h-12 w-full rounded-lg border border-input bg-background pl-10 pr-4 text-sm outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/15" />
+              </div>
+            </div>
+            <div>
+              <div className="mb-2 flex items-center justify-between">
+                <label htmlFor="password" className="text-sm font-medium">Mot de passe</label>
+                <a href="#" className="text-sm font-medium text-primary hover:underline">Mot de passe oublié ?</a>
+              </div>
+              <div className="relative">
+                <Lock className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <input id="password" type={show ? "text" : "password"} required placeholder="••••••••"
+                  className="h-12 w-full rounded-lg border border-input bg-background pl-10 pr-11 text-sm outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/15" />
+                <button type="button" onClick={() => setShow(!show)} aria-label="Afficher le mot de passe"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
+                  {show ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
+              </div>
+            </div>
+            <label className="flex items-center gap-2 text-sm text-muted-foreground">
+              <input type="checkbox" className="h-4 w-4 accent-primary" /> Se souvenir de moi
+            </label>
+            <button type="submit"
+              className="group flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-accent font-display font-semibold text-accent-foreground shadow-orange transition hover:brightness-105">
+              Se connecter <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+            </button>
+            <div className="flex items-center gap-3 text-xs text-muted-foreground">
+              <span className="h-px flex-1 bg-border" /> ou <span className="h-px flex-1 bg-border" />
+            </div>
+            <button type="button"
+              className="h-12 w-full rounded-lg border-2 border-primary/20 font-display text-sm font-semibold text-primary transition hover:bg-secondary">
+              Demander une démo
+            </button>
+          </form>
+
+          <div className="mt-10 grid grid-cols-4 gap-2 text-center">
+            {features.map(({ icon: Icon, label }) => (
+              <div key={label} className="flex flex-col items-center gap-2">
+                <Icon className="h-5 w-5 text-primary" />
+                <span className="text-[11px] leading-tight text-muted-foreground">{label}</span>
+              </div>
+            ))}
+          </div>
+          <p className="mt-10 text-center text-xs text-muted-foreground">© 2026 Kaydan Insights. Tous droits réservés.</p>
+        </div>
+      </section>
+    </main>
   );
 }
