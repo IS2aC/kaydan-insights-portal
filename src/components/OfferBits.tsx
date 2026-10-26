@@ -17,14 +17,14 @@ export function Deadline({ offer }: { offer: Offer }) {
 
 export function MatchScore({ value, size = "sm" }: { value: number; size?: "sm" | "lg" }) {
   const tone = value >= 80 ? "bg-success" : value >= 65 ? "bg-primary" : "bg-muted-foreground/50";
-  const label = value >= 80 ? "Fort" : value >= 65 ? "Moyen" : "Faible";
+  const label = value >= 80 ? "forte" : value >= 65 ? "moyenne" : "faible";
   return (
     <div className={cn("flex items-center gap-2", size === "lg" && "gap-3")}>
       <div className={cn("h-1.5 overflow-hidden rounded-full bg-muted", size === "lg" ? "w-28" : "w-14")}>
         <div className={cn("h-full rounded-full", tone)} style={{ width: `${value}%` }} />
       </div>
       <span className={cn("tabular-nums font-semibold", size === "lg" ? "text-lg" : "text-sm")}>{value}</span>
-      {size === "lg" && <span className="text-sm text-muted-foreground">adéquation {label.toLowerCase()}</span>}
+      {size === "lg" && <span className="text-sm text-muted-foreground">adéquation {label}</span>}
     </div>
   );
 }
