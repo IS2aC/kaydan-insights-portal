@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { Mail, Lock, Eye, EyeOff, ArrowRight, Search, Building2, BarChart3, Bell } from "lucide-react";
 import { AuthVisual } from "@/components/AuthVisual";
@@ -27,6 +27,7 @@ const features = [
 
 function Login() {
   const [show, setShow] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <main className="grid min-h-screen lg:grid-cols-[1.1fr_1fr]">
@@ -40,7 +41,7 @@ function Login() {
           <h1 className="text-3xl font-bold text-navy">Bon retour</h1>
           <p className="mt-2 text-muted-foreground">Connectez-vous pour accéder à vos opportunités du jour.</p>
 
-          <form className="mt-8 space-y-5 rounded-2xl border bg-card p-8 shadow-card" onSubmit={(e) => e.preventDefault()}>
+          <form className="mt-8 space-y-5 rounded-2xl border bg-card p-8 shadow-card" onSubmit={(e) => { e.preventDefault(); navigate({ to: "/accueil" }); }}>
             <div>
               <label htmlFor="email" className="mb-2 block text-sm font-medium">Adresse e-mail</label>
               <div className="relative">
