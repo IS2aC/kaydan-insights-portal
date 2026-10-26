@@ -29,7 +29,7 @@ export function StatusPill({ status }: { status: ReqStatus }) {
   return <span className={cn("whitespace-nowrap rounded-md px-2 py-0.5 text-xs font-semibold", map[1])}>{map[0]}</span>;
 }
 
-export function LotTag({ lot }: { lot?: string }) {
+export function LotTag({ lot }: { lot?: string | undefined }) {
   if (!lot) return null;
   return <span className="whitespace-nowrap rounded-md bg-muted px-1.5 py-0.5 text-xs font-medium text-muted-foreground">{lot}</span>;
 }

@@ -70,7 +70,7 @@ function ReportPage() {
             <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-3">
               <Fact icon={Building2} label="Acheteur" value={a.buyer} />
               <Fact icon={CalendarClock} label="Dépôt" value={`${r.keyInfo[0]?.items[0]?.value ?? "—"} · J-${left}`} tone={left <= 7 ? "text-destructive" : undefined} />
-              <Fact icon={Wallet} label="Financement" value={r.keyInfo.find((k) => k.label === "Source de financement")?.items[0].value ?? "—"} />
+              <Fact icon={Wallet} label="Financement" value={r.keyInfo.find((k) => k.label === "Source de financement")?.items[0]?.value ?? "—"} />
             </dl>
           </div>
           <button onClick={() => setDialog(true)} className="group flex items-center gap-4 rounded-xl border bg-background p-4 text-left hover:border-primary/40">
@@ -108,7 +108,7 @@ function ReportPage() {
   );
 }
 
-function Fact({ icon: Icon, label, value, tone }: { icon: typeof Building2; label: string; value: string; tone?: string }) {
+function Fact({ icon: Icon, label, value, tone }: { icon: typeof Building2; label: string; value: string; tone?: string | undefined }) {
   return (
     <div className="flex gap-2">
       <Icon className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" />
