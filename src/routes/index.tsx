@@ -24,7 +24,7 @@ function Logo({ inverted = false }: { inverted?: boolean }) {
     <img
       src={inverted ? logoDark : logoLight}
       alt="Kaydan Scrapers"
-      className={inverted ? "h-14 w-auto" : "h-12 w-auto"}
+      className={`w-auto max-w-full self-start ${inverted ? "h-14" : "h-12"}`}
     />
   );
 }
@@ -68,7 +68,7 @@ function Login() {
               ))}
             </ul>
           </div>
-          <p className="text-xs uppercase tracking-[0.3em] text-navy-foreground/60">
+          <p className="text-xs uppercase tracking-[0.3em] text-navy-foreground/80">
             Appels d'offres • Intelligence • Opportunités
           </p>
         </div>
