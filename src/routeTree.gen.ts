@@ -10,11 +10,24 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AccueilRouteImport } from './routes/accueil'
+import { Route as GonogoRouteImport } from './routes/gonogo'
 import { Route as InscriptionRouteImport } from './routes/inscription'
+import { Route as OffresRouteImport } from './routes/offres'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccueilRoute = AccueilRouteImport.update({
+  id: '/accueil',
+  path: '/accueil',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GonogoRoute = GonogoRouteImport.update({
+  id: '/gonogo',
+  path: '/gonogo',
   getParentRoute: () => rootRouteImport,
 } as any)
 const InscriptionRoute = InscriptionRouteImport.update({
@@ -22,31 +35,48 @@ const InscriptionRoute = InscriptionRouteImport.update({
   path: '/inscription',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OffresRoute = OffresRouteImport.update({
+  id: '/offres',
+  path: '/offres',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/accueil': typeof AccueilRoute
+  '/gonogo': typeof GonogoRoute
   '/inscription': typeof InscriptionRoute
+  '/offres': typeof OffresRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/accueil': typeof AccueilRoute
+  '/gonogo': typeof GonogoRoute
   '/inscription': typeof InscriptionRoute
+  '/offres': typeof OffresRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/accueil': typeof AccueilRoute
+  '/gonogo': typeof GonogoRoute
   '/inscription': typeof InscriptionRoute
+  '/offres': typeof OffresRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/inscription'
+  fullPaths: '/' | '/accueil' | '/gonogo' | '/inscription' | '/offres'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/inscription'
-  id: '__root__' | '/' | '/inscription'
+  to: '/' | '/accueil' | '/gonogo' | '/inscription' | '/offres'
+  id: '__root__' | '/' | '/accueil' | '/gonogo' | '/inscription' | '/offres'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AccueilRoute: typeof AccueilRoute
+  GonogoRoute: typeof GonogoRoute
   InscriptionRoute: typeof InscriptionRoute
+  OffresRoute: typeof OffresRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,6 +88,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/accueil': {
+      id: '/accueil'
+      path: '/accueil'
+      fullPath: '/accueil'
+      preLoaderRoute: typeof AccueilRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gonogo': {
+      id: '/gonogo'
+      path: '/gonogo'
+      fullPath: '/gonogo'
+      preLoaderRoute: typeof GonogoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/inscription': {
       id: '/inscription'
       path: '/inscription'
@@ -65,12 +109,22 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InscriptionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/offres': {
+      id: '/offres'
+      path: '/offres'
+      fullPath: '/offres'
+      preLoaderRoute: typeof OffresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AccueilRoute: AccueilRoute,
+  GonogoRoute: GonogoRoute,
   InscriptionRoute: InscriptionRoute,
+  OffresRoute: OffresRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
