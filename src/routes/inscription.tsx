@@ -52,7 +52,7 @@ const field = "h-12 w-full rounded-lg border bg-background text-sm outline-none 
 const fieldOk = "border-input";
 const fieldBad = "border-destructive";
 
-function Err({ msg }: { msg?: string }) {
+function Err({ msg }: { msg: string | undefined }) {
   return msg ? <p className="mt-1.5 text-xs font-medium text-destructive">{msg}</p> : null;
 }
 
