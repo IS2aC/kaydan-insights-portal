@@ -82,14 +82,14 @@ function Signup() {
     const password = String(form.get("password") ?? "");
     const confirm = String(form.get("confirm") ?? "");
     const phone = String(form.get("phone") ?? "").replace(/[\s.\-()]/g, "");
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) e.email = "Adresse e-mail invalide.";
-    if (password.length < 8) e.password = "8 caractères minimum.";
-    if (confirm !== password || !confirm) e.confirm = "Les mots de passe ne correspondent pas.";
-    if (String(form.get("company") ?? "").trim().length < 2) e.company = "Nom de l'entreprise requis.";
-    if (!String(form.get("sector") ?? "")) e.sector = "Sélectionnez un secteur.";
-    if (!String(form.get("size") ?? "")) e.size = "Sélectionnez une fourchette.";
-    if (String(form.get("city") ?? "").trim().length < 2) e.city = "Ville et pays requis.";
-    if (!/^\+?\d{7,15}$/.test(phone)) e.phone = "Numéro de téléphone invalide.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) e["email"] = "Adresse e-mail invalide.";
+    if (password.length < 8) e["password"] = "8 caractères minimum.";
+    if (confirm !== password || !confirm) e["confirm"] = "Les mots de passe ne correspondent pas.";
+    if (String(form.get("company") ?? "").trim().length < 2) e["company"] = "Nom de l'entreprise requis.";
+    if (!String(form.get("sector") ?? "")) e["sector"] = "Sélectionnez un secteur.";
+    if (!String(form.get("size") ?? "")) e["size"] = "Sélectionnez une fourchette.";
+    if (String(form.get("city") ?? "").trim().length < 2) e["city"] = "Ville et pays requis.";
+    if (!/^\+?\d{7,15}$/.test(phone)) e["phone"] = "Numéro de téléphone invalide.";
     return e;
   }
 
