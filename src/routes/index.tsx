@@ -46,7 +46,7 @@ function Login() {
               <div className="relative">
                 <Mail className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <input id="email" type="email" required placeholder="nom@entreprise.com"
-                  className="h-12 w-full rounded-lg border border-input bg-background pl-10 pr-4 text-sm outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/15" />
+                  className="h-12 w-full rounded-lg border border-input bg-background pl-10 pr-4 text-sm outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/15 placeholder:text-muted-foreground" />
               </div>
             </div>
             <div>
@@ -57,7 +57,7 @@ function Login() {
               <div className="relative">
                 <Lock className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <input id="password" type={show ? "text" : "password"} required placeholder="••••••••"
-                  className="h-12 w-full rounded-lg border border-input bg-background pl-10 pr-11 text-sm outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/15" />
+                  className="h-12 w-full rounded-lg border border-input bg-background pl-10 pr-11 text-sm outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/15 placeholder:text-muted-foreground" />
                 <button type="button" onClick={() => setShow(!show)} aria-label="Afficher le mot de passe"
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
                   {show ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}

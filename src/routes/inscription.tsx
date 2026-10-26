@@ -48,11 +48,11 @@ const DOCUMENTS = [
   { key: "partners", label: "ABE / CV partenaires", hint: "Sous-traitants et partenaires" },
 ] as const;
 
-const field = "h-12 w-full rounded-lg border bg-background text-sm outline-none transition focus:ring-4 focus:ring-primary/15 focus:border-primary";
+const field = "h-12 w-full rounded-lg border bg-background text-sm outline-none transition focus:ring-4 focus:ring-primary/15 focus:border-primary placeholder:text-muted-foreground";
 const fieldOk = "border-input";
 const fieldBad = "border-destructive";
 
-function Err({ msg }: { msg?: string }) {
+function Err({ msg }: { msg: string | undefined }) {
   return msg ? <p className="mt-1.5 text-xs font-medium text-destructive">{msg}</p> : null;
 }
 
@@ -82,14 +82,14 @@ function Signup() {
     const password = String(form.get("password") ?? "");
     const confirm = String(form.get("confirm") ?? "");
     const phone = String(form.get("phone") ?? "").replace(/[\s.\-()]/g, "");
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) e.email = "Adresse e-mail invalide.";
-    if (password.length < 8) e.password = "8 caractères minimum.";
-    if (confirm !== password || !confirm) e.confirm = "Les mots de passe ne correspondent pas.";
-    if (String(form.get("company") ?? "").trim().length < 2) e.company = "Nom de l'entreprise requis.";
-    if (!String(form.get("sector") ?? "")) e.sector = "Sélectionnez un secteur.";
-    if (!String(form.get("size") ?? "")) e.size = "Sélectionnez une fourchette.";
-    if (String(form.get("city") ?? "").trim().length < 2) e.city = "Ville et pays requis.";
-    if (!/^\+?\d{7,15}$/.test(phone)) e.phone = "Numéro de téléphone invalide.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) e["email"] = "Adresse e-mail invalide.";
+    if (password.length < 8) e["password"] = "8 caractères minimum.";
+    if (confirm !== password || !confirm) e["confirm"] = "Les mots de passe ne correspondent pas.";
+    if (String(form.get("company") ?? "").trim().length < 2) e["company"] = "Nom de l'entreprise requis.";
+    if (!String(form.get("sector") ?? "")) e["sector"] = "Sélectionnez un secteur.";
+    if (!String(form.get("size") ?? "")) e["size"] = "Sélectionnez une fourchette.";
+    if (String(form.get("city") ?? "").trim().length < 2) e["city"] = "Ville et pays requis.";
+    if (!/^\+?\d{7,15}$/.test(phone)) e["phone"] = "Numéro de téléphone invalide.";
     return e;
   }
 
@@ -142,35 +142,35 @@ function Signup() {
                   <div className="relative">
                     <Mail className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                     <input id="email" name="email" type="email" required placeholder="nom@entreprise.com"
-                      aria-invalid={!!errors.email}
-                      className={`${field} pl-10 pr-4 ${errors.email ? fieldBad : fieldOk}`} />
+                      aria-invalid={!!errors["email"]}
+                      className={`${field} pl-10 pr-4 ${errors["email"] ? fieldBad : fieldOk}`} />
                   </div>
-                  <Err msg={errors.email} />
+                  <Err msg={errors["email"]} />
                 </div>
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div>
                     <label htmlFor="password" className="mb-2 block text-sm font-medium">Mot de passe <span className="text-brand-orange">*</span></label>
                     <div className="relative">
                       <Lock className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                      <input id="password" name="password" type={show ? "text" : "password"} required placeholder="8 caractères minimum"
-                        aria-invalid={!!errors.password}
-                        className={`${field} pl-10 pr-11 ${errors.password ? fieldBad : fieldOk}`} />
+                      <input id="password" name="password" type={show ? "text" : "password"} required placeholder="8 caractères min."
+                        aria-invalid={!!errors["password"]}
+                        className={`${field} pl-10 pr-11 ${errors["password"] ? fieldBad : fieldOk}`} />
                       <button type="button" onClick={() => setShow(!show)} aria-label="Afficher le mot de passe"
                         className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
                         {show ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                       </button>
                     </div>
-                    <Err msg={errors.password} />
+                    <Err msg={errors["password"]} />
                   </div>
                   <div>
                     <label htmlFor="confirm" className="mb-2 block text-sm font-medium">Confirmer <span className="text-brand-orange">*</span></label>
                     <div className="relative">
                       <Lock className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                      <input id="confirm" name="confirm" type={show ? "text" : "password"} required placeholder="Retapez le mot de passe"
-                        aria-invalid={!!errors.confirm}
-                        className={`${field} pl-10 pr-4 ${errors.confirm ? fieldBad : fieldOk}`} />
+                      <input id="confirm" name="confirm" type={show ? "text" : "password"} required placeholder="••••••••"
+                        aria-invalid={!!errors["confirm"]}
+                        className={`${field} pl-10 pr-4 ${errors["confirm"] ? fieldBad : fieldOk}`} />
                     </div>
-                    <Err msg={errors.confirm} />
+                    <Err msg={errors["confirm"]} />
                   </div>
                 </div>
               </div>
@@ -183,50 +183,50 @@ function Signup() {
                 <div>
                   <label htmlFor="company" className="mb-2 block text-sm font-medium">Nom de l'entreprise <span className="text-brand-orange">*</span></label>
                   <input id="company" name="company" required placeholder="Ex. Bâtiments du Golfe SARL"
-                    aria-invalid={!!errors.company}
-                    className={`${field} px-4 ${errors.company ? fieldBad : fieldOk}`} />
-                  <Err msg={errors.company} />
+                    aria-invalid={!!errors["company"]}
+                    className={`${field} px-4 ${errors["company"] ? fieldBad : fieldOk}`} />
+                  <Err msg={errors["company"]} />
                 </div>
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div>
                     <label htmlFor="sector" className="mb-2 block text-sm font-medium">Secteur <span className="text-brand-orange">*</span></label>
                     <div className="relative">
-                      <select id="sector" name="sector" required defaultValue="" aria-invalid={!!errors.sector}
-                        className={`${field} appearance-none px-4 pr-10 ${errors.sector ? fieldBad : fieldOk}`}>
+                      <select id="sector" name="sector" required defaultValue="" aria-invalid={!!errors["sector"]}
+                        className={`${field} appearance-none px-4 pr-10 ${errors["sector"] ? fieldBad : fieldOk}`}>
                         <option value="" disabled>Sélectionnez…</option>
                         {SECTORS.map((s) => <option key={s} value={s}>{s}</option>)}
                       </select>
                       <ChevronDown className="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                     </div>
-                    <Err msg={errors.sector} />
+                    <Err msg={errors["sector"]} />
                   </div>
                   <div>
                     <label htmlFor="size" className="mb-2 block text-sm font-medium">Taille (fourchette) <span className="text-brand-orange">*</span></label>
                     <div className="relative">
-                      <select id="size" name="size" required defaultValue="" aria-invalid={!!errors.size}
-                        className={`${field} appearance-none px-4 pr-10 ${errors.size ? fieldBad : fieldOk}`}>
+                      <select id="size" name="size" required defaultValue="" aria-invalid={!!errors["size"]}
+                        className={`${field} appearance-none px-4 pr-10 ${errors["size"] ? fieldBad : fieldOk}`}>
                         <option value="" disabled>Sélectionnez…</option>
                         {SIZES.map((s) => <option key={s} value={s}>{s}</option>)}
                       </select>
                       <ChevronDown className="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                     </div>
-                    <Err msg={errors.size} />
+                    <Err msg={errors["size"]} />
                   </div>
                 </div>
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div>
                     <label htmlFor="city" className="mb-2 block text-sm font-medium">Ville / pays <span className="text-brand-orange">*</span></label>
                     <input id="city" name="city" required placeholder="Abidjan, Côte d'Ivoire"
-                      aria-invalid={!!errors.city}
-                      className={`${field} px-4 ${errors.city ? fieldBad : fieldOk}`} />
-                    <Err msg={errors.city} />
+                      aria-invalid={!!errors["city"]}
+                      className={`${field} px-4 ${errors["city"] ? fieldBad : fieldOk}`} />
+                    <Err msg={errors["city"]} />
                   </div>
                   <div>
                     <label htmlFor="phone" className="mb-2 block text-sm font-medium">Téléphone <span className="text-brand-orange">*</span></label>
                     <input id="phone" name="phone" type="tel" required placeholder="+225 07 00 00 00"
-                      aria-invalid={!!errors.phone}
-                      className={`${field} px-4 ${errors.phone ? fieldBad : fieldOk}`} />
-                    <Err msg={errors.phone} />
+                      aria-invalid={!!errors["phone"]}
+                      className={`${field} px-4 ${errors["phone"] ? fieldBad : fieldOk}`} />
+                    <Err msg={errors["phone"]} />
                   </div>
                 </div>
               </div>
