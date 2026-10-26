@@ -6,7 +6,7 @@ const claims = ["Plus rapide", "Plus pertinent", "Plus de succès"];
 
 export function AuthVisual() {
   return (
-    <section className="relative hidden overflow-hidden lg:block">
+    <section className="sticky top-0 hidden h-screen overflow-hidden lg:block">
       <img src={hero} alt="" className="absolute inset-0 h-full w-full object-cover" />
       <div className="absolute inset-0 bg-gradient-navy" />
       <div className="absolute -right-24 top-0 h-full w-48 skew-x-[-12deg] bg-brand-orange/80" />

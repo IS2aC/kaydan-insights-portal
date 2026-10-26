@@ -48,7 +48,7 @@ const DOCUMENTS = [
   { key: "partners", label: "ABE / CV partenaires", hint: "Sous-traitants et partenaires" },
 ] as const;
 
-const field = "h-12 w-full rounded-lg border bg-background text-sm outline-none transition focus:ring-4 focus:ring-primary/15 focus:border-primary";
+const field = "h-12 w-full rounded-lg border bg-background text-sm outline-none transition focus:ring-4 focus:ring-primary/15 focus:border-primary placeholder:text-muted-foreground";
 const fieldOk = "border-input";
 const fieldBad = "border-destructive";
 
@@ -152,7 +152,7 @@ function Signup() {
                     <label htmlFor="password" className="mb-2 block text-sm font-medium">Mot de passe <span className="text-brand-orange">*</span></label>
                     <div className="relative">
                       <Lock className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                      <input id="password" name="password" type={show ? "text" : "password"} required placeholder="8 caractères minimum"
+                      <input id="password" name="password" type={show ? "text" : "password"} required placeholder="8 caractères min."
                         aria-invalid={!!errors["password"]}
                         className={`${field} pl-10 pr-11 ${errors["password"] ? fieldBad : fieldOk}`} />
                       <button type="button" onClick={() => setShow(!show)} aria-label="Afficher le mot de passe"
@@ -166,7 +166,7 @@ function Signup() {
                     <label htmlFor="confirm" className="mb-2 block text-sm font-medium">Confirmer <span className="text-brand-orange">*</span></label>
                     <div className="relative">
                       <Lock className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                      <input id="confirm" name="confirm" type={show ? "text" : "password"} required placeholder="Retapez le mot de passe"
+                      <input id="confirm" name="confirm" type={show ? "text" : "password"} required placeholder="••••••••"
                         aria-invalid={!!errors["confirm"]}
                         className={`${field} pl-10 pr-4 ${errors["confirm"] ? fieldBad : fieldOk}`} />
                     </div>
