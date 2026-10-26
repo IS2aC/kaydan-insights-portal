@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { AlertTriangle, ArrowLeft, Building2, CalendarClock, CheckCircle2, ChevronDown, ExternalLink, FileText, Printer, Search, ShieldAlert, Sparkles as _unused, Target, Wallet } from "lucide-react";
+import { AlertTriangle, ArrowLeft, Building2, CalendarClock, CheckCircle2, ChevronDown, ExternalLink, FileText, Printer, Search, ShieldAlert, Target, Wallet } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { FeasibilityDialog } from "@/components/FeasibilityDialog";
 import { LotTag, Pipeline, ScoreRing, StatusPill, VerdictBadge } from "@/components/GoNoGoBits";
@@ -8,7 +8,6 @@ import { analyses, computeIndex, formatDateTime, type Analysis, type Report } fr
 import { daysLeft } from "@/lib/offers";
 import { cn } from "@/lib/utils";
 
-void _unused;
 
 export const Route = createFileRoute("/gonogo_/$id")({
   loader: ({ params }) => {
